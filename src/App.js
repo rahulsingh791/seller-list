@@ -11,19 +11,26 @@ import Login from './Login'
 class App extends Component {
   constructor(){
     super()
-    this.cartChild = React.createRef();
+   
+    
+    this.logoutButton = React.createRef();
+    this.cartButton = React.createRef();
+    
+    
   }
 
-  logOut = () => {
-    localStorage.removeItem("Auth");
-    window.location.href="/login"
+
+
+  componentDidMount(){
+
+
   }
  
 
   render(){
 
-    const PrivateRoute = ({ component: Component, ...rest }) => (
-      <Route {...rest} render={(props) => (
+    const PrivateRoute = () => (
+      <Route  render={() => (
         localStorage.getItem("Auth") == "true"
           ? ""
           : <Redirect to='/login' />
@@ -33,10 +40,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
+          
           <PrivateRoute/>
-          <button className="logoutButton" onClick={this.logOut}>Logout</button>
-          <button className="cartButton" onClick={() => this.cartChild.current.showCartList()}><img src={require('./assets/shopping-cart.svg')}/></button>
-          <CartList ref={this.cartChild}/>
           <Route exact path="/"><Sellers /></Route>
           <Route path="/products"><Products /></Route>
           <Route path="/login"><Login /></Route>

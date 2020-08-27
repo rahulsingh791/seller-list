@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import PElement from './PElement';
+import CartList from './CartList'
 
 class Products extends Component {
+    constructor(){
+        super()
+        this.cartChild = React.createRef();
+    }
+
+    logOut = () => {
+        localStorage.removeItem("Auth");
+        window.location.href="/login"
+      }
 
 
     render(){
@@ -18,6 +28,11 @@ class Products extends Component {
         }
 
         return(
+
+            <div className="supSeller">
+            <button ref={this.logoutButton} className="logoutButton" onClick={this.logOut}>Logout</button>
+            <button ref={this.cartButton} className="cartButton" onClick={() => this.cartChild.current.showCartList()}><img src={require('./../assets/shopping-cart.svg')}/></button>
+            <CartList ref={this.cartChild}/>
             <div className="productPage">
                 <div className="heaDing">
                    
@@ -28,6 +43,7 @@ class Products extends Component {
                 <div className="productList">
                     {productList}
                 </div>
+            </div>
             </div>
         );
     }

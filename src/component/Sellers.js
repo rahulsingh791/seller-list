@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
+import CartList from './CartList';
 
 class Sellers extends Component {
     constructor(){
         super();
 
+        this.cartChild = React.createRef();
         let scount = 6
 
         localStorage.setItem("scount", scount);
@@ -45,12 +47,19 @@ class Sellers extends Component {
         window.location.href="/products"
     }
 
+    logOut = () => {
+        localStorage.removeItem("Auth");
+        window.location.href="/login"
+      }
 
     render(){
 
-
-
         return(
+
+            <div className="supSeller">
+            <button ref={this.logoutButton} className="logoutButton" onClick={this.logOut}>Logout</button>
+            <button ref={this.cartButton} className="cartButton" onClick={() => this.cartChild.current.showCartList()}><img src={require('./../assets/shopping-cart.svg')}/></button>
+            <CartList ref={this.cartChild}/>
             <div className="sellerPage">
                     <div className="heaDing">
                         <h3>SELLERS</h3>
@@ -75,7 +84,7 @@ class Sellers extends Component {
                             <h6>Seller 6</h6>
                         </button>                      
                     </div>
-
+                </div>
             </div>
         );
     }

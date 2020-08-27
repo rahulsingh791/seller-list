@@ -2,7 +2,13 @@
     outline: none;
 }
 
+
+.supSeller {
+    height: 100vh;
+}
+
 .cartButton {
+
     position: relative;
     left:45%;
     margin-top: 2%;
@@ -163,6 +169,8 @@
 }
 
 .logoutButton {
+    
+    
     position: relative;
     left:40%;
     margin-top:-10%;
